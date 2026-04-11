@@ -1,5 +1,6 @@
 # Naziv aplikacije: ReciklirajMe
 Projekt iz kolegija Programsko inženjerstvo
+TIM: 319/25
 
 ## Team memebers:
 - Lana Kohut (voditelj tima) lkohut@unipu.hr
@@ -17,6 +18,7 @@ Projekt iz kolegija Programsko inženjerstvo
 Aplikacija uključuje informacije o svakom kontejneru, što se u taj kontejner baca, pretragu proizvoda, dodatne informacije. Cilj aplikacije je edukacija i mogućnost kvalitetnijeg recikliranja otpada.
 
 ## Link na javni prototip
+[ReciklirajMe prototip](https://reciklirajme.my.canva.site)
 
 ## Zaduženja (planirana) po članu tima
 https://github.com/users/ladyeowyn/projects/1/views/1
