@@ -2,6 +2,7 @@
 
 - [04.04.2026. - Inicijalni sastanak](#04042026---inicijalni-sastanak)
 - [11.04.2026. - Tjedni sastanak](#11042026---tjedni-sastanak)
+- [18.04.2026. - Tjedni sastanak](#18042026---tjedni-sastanak)
 
 # 04.04.2026. - Inicijalni sastanak
 
@@ -75,3 +76,19 @@ Lana: dodati obavijesti stranicu, maknuti oznake (jer idu u edu sekciju), ostali
 Anja: ispraviti Class dijagram za otpad i kontejnere, dodati Use case za reciklazna dvorista i FAQ
 
 Tokom sljedećeg tjedna definiramo backlog taskova preko Discorda i updateamo Projects task list i definiramo tko nće a čemu početi raditi.
+
+# 18.04.2026. - Tjedni sastanak
+
+Prisutni svi članovi tima.
+Sastanak obavljen preko Discorda.
+
+## Diskusija
+
+1. Dodani tasks frontend dijela u backlog.
+2. Čekamo info od profesora da odradimo konzultacije da vidimo jesmo li na dobrom putu do sada.
+3. Reminder za sljedeći sastanak: dokumentacija!
+
+## Dogovoreno
+
+Assignati ćemo taskove na kojima će svaka raditi, jedan tjedno. Anja će krenuti sa prvom main stranicom.
+Lana će provjeriti korištenje slika s Canve (koje smo koristile u prototipu).
