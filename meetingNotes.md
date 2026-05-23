@@ -3,6 +3,9 @@
 - [04.04.2026. - Inicijalni sastanak](#04042026---inicijalni-sastanak)
 - [11.04.2026. - Tjedni sastanak](#11042026---tjedni-sastanak)
 - [18.04.2026. - Tjedni sastanak](#18042026---tjedni-sastanak)
+- [02.05.2026. - Tjedni sastanak](#02052026---tjedni-sastanak)
+- [17.05.2026. - Tjedni sastanak](#17052026---tjedni-sastanak)
+- [23.05.2026. - Tjedni sastanak](#23052026---tjedni-sastanak)
 
 # 04.04.2026. - Inicijalni sastanak
 
@@ -92,6 +95,43 @@ Sastanak obavljen preko Discorda.
 
 Assignati ćemo taskove na kojima će svaka raditi, jedan tjedno. Anja će krenuti sa prvom main stranicom.
 Lana će provjeriti korištenje slika s Canve (koje smo koristile u prototipu).
+
+# 02.05.2026. - Tjedni sastanak
+
+Prisutni svi članovi tima.
+Sastanak obavljen preko Discorda.
+
+## Diskusija
+
+1. Lana je napravila Vue projekt
+2. Dogovor kako krećemo rad na taskovima, assign na sebe
+3. Preskoćen sastanak 25.04. jer nisam imali updates tada
+4. 20.04 odrađene konzultacije sa profesorom:
+- bolji dizajn sa Google stitch
+- chatbot (za 5)
+- kodiranje sa AI (bitno da razumijemo output
+- mapa (za reciklažna dvorišta)
+- admin user za svaku lokaciju (jedan za Krk, Opatiju i Rijeku)
+
+## Dogovoreno
+
+Nastavljamo dalje po taskovima.
+
+# 17.05.2026. - Tjedni sastanak
+
+Prisutni svi članovi tima.
+Sastanak obavljen preko Discorda.
+
+## Diskusija
+
+1. Preskočen sastanak prethodnog tjedna (09.05.) zbog bolesti
+2. Dogovor oko dodatnih taskova nakon konzultacija sa profesorom, još ćemo odlučiti
+3. Dokumentacija - bolje početi pisati kako je tko radio na nečemu pa ćemo kasnije spojiti
+4. Diskusija o prođenih taskovima
+
+## Dogovoreno
+
+Anja: moram proći router dio da razumijem na koji način sada prikazujemo homescreen
 
 # 23.05.2026. - Tjedni sastanak
 
