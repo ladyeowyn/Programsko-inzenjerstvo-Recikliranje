@@ -27,7 +27,7 @@
 
       <!-- LOGIN -->
       <button
-        @click="navigate('/login')"
+        @click="navigate('/Login')"
         class="w-52 py-4 rounded-full font-bold text-lg tracking-widest underline
                transition-all duration-200 hover:scale-105 hover:brightness-110 active:scale-95"
         style="background-color: #5aade0; color: #000;"
@@ -37,7 +37,7 @@
 
       <!-- REGISTRACIJA -->
       <button
-        @click="navigate('/registracija')"
+        @click="navigate('/Registracija')"
         class="w-52 py-4 rounded-full font-bold text-lg tracking-widest underline
                transition-all duration-200 hover:scale-105 hover:brightness-110 active:scale-95"
         style="background-color: #5aade0; color: #000;"

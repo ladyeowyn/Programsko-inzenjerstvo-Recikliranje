@@ -11,14 +11,14 @@ import Search from '../components/Search.vue'
 
 const routes = [
   { path: '/', component: HomeScreen },
-  { path: '/login', component: Login },
-  { path: '/registracija', component: Registracija },
-  { path: '/kontejneri', component: KontejneriGuest },
-  { path: '/kontejneri-loggedin', component: kontejneri_loggedin },
-  { path: '/lokacija', component: Lokacija },
-  { path: '/obavijesti', component: Obavijesti },
-  { path: '/reciklazna-dvorista', component: Reciklazna_dvorista },
-  { path: '/search', component: Search },
+  { path: '/Login', component: Login },
+  { path: '/Registracija', component: Registracija },
+  { path: '/kontejneri_guest', component: KontejneriGuest },
+  { path: '/kontejneri_loggedin', component: kontejneri_loggedin },
+  { path: '/Lokacija', component: Lokacija },
+  { path: '/Obavijesti', component: Obavijesti },
+  { path: '/Reciklazna_dvorista', component: Reciklazna_dvorista },
+  { path: '/Search', component: Search },
 ]
 
 export default createRouter({
