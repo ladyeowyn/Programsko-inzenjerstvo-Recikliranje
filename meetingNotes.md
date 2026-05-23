@@ -92,3 +92,17 @@ Sastanak obavljen preko Discorda.
 
 Assignati ćemo taskove na kojima će svaka raditi, jedan tjedno. Anja će krenuti sa prvom main stranicom.
 Lana će provjeriti korištenje slika s Canve (koje smo koristile u prototipu).
+
+# 23.05.2026. - Tjedni sastanak
+
+Prisutni svi članovi tima.
+Sastanak obavljen preko Discorda.
+
+## Diskusija
+
+1. Glavni dizajn stranice ćemo pomaknuti u glavni css (pozadina, fontovi, boje gumba, itd)
+2. Promijeniti ćemo rute za navigaciju u router link
+3. Nastavak rada po zadacima koje si assignamo
+
+Napomena: Update od prijašnjih sastanaka koji nije ovdje zapisan:
+- Canva dozvoljava korištenje slika za nekomercijalne svrhe ukoliko su izmijenjene (nešto je dodano na njih), što je u našem slučaju u redu jer je Canvina slika naša pozadina
