@@ -6,7 +6,59 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
+}
+
+.app-background {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("/pozadina.png");
+}
+
+/* Globalna klasa za logo komponentu */
+.global-logo {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  cursor: pointer; /* Dodano jer je u kodu imalo klik za povratak home */
+
+  /* Stilovi za h1 unutar loga */
+  h1 {
+    font-size: 4.5rem; /* Ekvivalent za text-7xl */
+    font-weight: 700;
+    font-family: "Caveat", cursive;
+    color: #2eaa2e;
+    margin: 0;
+  }
+
+  /* Stilovi za podcrtanu liniju */
+  .logo-underline {
+    height: 4px; /* Ekvivalent za h-1 */
+    width: 100%;
+    margin-top: 4px; /* Ekvivalent za mt-1 */
+    border-radius: 9999px; /* Ekvivalent za rounded-full */
+    background-color: #2eaa2e;
+  }
+}
+
+/* Responzivnost: na ekranima većim od 768px (MD), povećaj font */
+@media (min-width: 768px) {
+  .global-logo h1 {
+    font-size: 6rem; /* Ekvivalent za text-8xl */
+  }
 }
