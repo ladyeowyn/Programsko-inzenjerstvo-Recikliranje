@@ -35,7 +35,6 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 40px;
-  cursor: pointer; /* Dodano jer je u kodu imalo klik za povratak home */
 
   /* Stilovi za h1 unutar loga */
   h1 {

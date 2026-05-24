@@ -75,7 +75,7 @@ const goHome = () => {
 <template>
   <div class="app-background">
     <div class="registration-container">
-      <header @click="goHome" class="global-logo">
+      <header @click="goHome" class="global-logo cursor-pointer">
         <h1>ReciklirajMe</h1>
         <div class="logo-underline"></div>
       </header>

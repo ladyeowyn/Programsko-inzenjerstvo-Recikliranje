@@ -14,19 +14,17 @@ const formData = reactive({
   password: "",
 });
 
-// Simulacija slanja forme i provjere baze
+// Slanje forme za prijavu
 const handleLogin = () => {
   console.log("Podaci poslani na server:", formData);
 
-  // OVDJE SIMULIRAMO BACKEND: Ako korisnik nije pronađen, otvara se pop-up
-  // Kasnije ćemo ovdje staviti pravi 'catch' blok
-  const userExistsInDatabase = false; //True ako je uspješan login
+  // Ovdje simuliramo bazu
+  const userExistsInDatabase = true;
 
   if (!userExistsInDatabase) {
-    showPopup.value = true; // Otvara pop-up ako korisnik ne postoji
+    showPopup.value = true;
   } else {
-    alert("Uspješna prijava!");
-    router.push("/dashboard"); // Site nakon logina
+    router.push("/kontejneri_loggedin");
   }
 };
 
@@ -45,7 +43,7 @@ const goHome = () => {
 <template>
   <div class="app-background">
     <div class="login-container">
-      <header @click="goHome" class="global-logo">
+      <header @click="goHome" class="global-logo cursor-pointer">
         <h1>ReciklirajMe</h1>
         <div class="logo-underline"></div>
       </header>
