@@ -1,10 +1,10 @@
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase.js";
+import { useAuthStore } from "../stores/authStore";
 
+const authStore = useAuthStore();
 const router = useRouter();
 
 const email = ref("");
@@ -16,23 +16,10 @@ const gradovi = ["Rijeka", "Krk", "Opatija"];
 const odabraniGrad = ref("");
 
 const register = async () => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email.value,
-      password.value,
-    );
-    response.value.error = false;
-    response.value.message =
-      "Korisnik registriran: " + JSON.stringify(userCredential.user);
-  } catch (error) {
-    response.value.error = true;
-    response.value.message = "Greška pri registraciji: " + error.message;
+  await authStore.register(email.value, password.value);
+  if (!authStore.response.error) {
+    router.push("/Login");
   }
-};
-
-const sendVerification = async () => {
-  await sendEmailVerification(auth.currentUser);
 };
 
 const provjeraMaila = computed(() => {
@@ -64,6 +51,10 @@ const validacijaBotuna = computed(() => {
     passMatch.value
   );
 });
+
+onMounted(() => {
+  authStore.clearResponse();
+});
 </script>
 
 <template>
@@ -79,7 +70,7 @@ const validacijaBotuna = computed(() => {
       <div class="form-card">
         <h2>Registracija</h2>
 
-        <form>
+        <form @submit.prevent="register">
           <div class="form-group">
             <label>Email adresa</label>
             <input
@@ -130,7 +121,7 @@ const validacijaBotuna = computed(() => {
               placeholder="Ponovi lozinku..."
             />
             <span class="error-text" v-if="!passMatch && password2.length > 0">
-              Lozinke se moraju poklapahttp://localhost:5173/ti!!
+              Lozinke se moraju poklapati!!
             </span>
           </div>
 
@@ -159,21 +150,17 @@ const validacijaBotuna = computed(() => {
           >
             Spremi
           </button>
-
-          <span :class="response.error ? 'error-text' : 'hint-text'">{{
-            response.message
-          }}</span>
         </form>
-        <br />
 
-        <form @submit.prevent="sendVerification">
-          <div class="form-group">
-            <label>Slanje email potvrde</label>
-            <button class="btn-secondary" type="submit">
-              Pošalji email potvrdu
-            </button>
-          </div>
-        </form>
+        <div
+          class="password-hints"
+          v-if="authStore.response.message.length > 0"
+        >
+          <span
+            :class="authStore.response.error ? 'error-text' : 'hint-text'"
+            >{{ authStore.response.message }}</span
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -195,7 +182,7 @@ const validacijaBotuna = computed(() => {
 }
 
 .hint-text {
-  color: #6d1414;
+  color: #414d12;
   font-size: 0.8rem;
   margin: 3px 0;
   font-weight: bold;

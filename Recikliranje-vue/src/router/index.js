@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { auth } from "../firebase";
+
 import LoginView from "../views/LoginView.vue";
 import RegistracijaView from "../views/RegistracijaView.vue";
 import UserProfileView from "../views/UserProfileView.vue";
@@ -13,17 +15,57 @@ import Search from "../components/Search.vue";
 const routes = [
   { path: "/", component: HomeScreen },
   { path: "/Login", component: LoginView },
-  { path: "/Registracija", component: RegistracijaView },
-  { path: "/UserProfile", component: UserProfileView },
-  { path: "/kontejneri_guest", component: KontejneriGuest },
-  { path: "/kontejneri_loggedin", component: kontejneri_loggedin },
-  { path: "/Lokacija", component: Lokacija },
-  { path: "/Obavijesti", component: Obavijesti },
-  { path: "/Reciklazna_dvorista", component: Reciklazna_dvorista },
-  { path: "/Search", component: Search },
+  {
+    path: "/Registracija",
+    component: RegistracijaView,
+  },
+  {
+    path: "/UserProfile",
+    component: UserProfileView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/kontejneri_guest",
+    component: KontejneriGuest,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/kontejneri_loggedin",
+    component: kontejneri_loggedin,
+    meta: { requiresAuth: true },
+  },
+  { path: "/Lokacija", component: Lokacija, meta: { requiresAuth: true } },
+  { path: "/Obavijesti", component: Obavijesti, meta: { requiresAuth: true } },
+  {
+    path: "/Reciklazna_dvorista",
+    component: Reciklazna_dvorista,
+    meta: { requiresAuth: true },
+  },
+  { path: "/Search", component: Search, meta: { requiresAuth: true } },
 ];
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+// Navigation guard - zaštita ruta
+router.beforeEach((to, from) => {
+  const requiresAuth = to.meta.requiresAuth;
+  const currentUser = auth.currentUser;
+
+  if (requiresAuth && !currentUser) {
+    // Ruta zahtjeva prijavu, ali korisnik nije prijavljen
+    return "/login";
+  } else if (
+    (to.name === "login" || to.name === "registracija") &&
+    currentUser
+  ) {
+    // Korisnik je već prijavljen, ne treba mu login/register stranica
+    return "/kontejneri_loggedin";
+  } else {
+    return;
+  }
+});
+
+export default router;
