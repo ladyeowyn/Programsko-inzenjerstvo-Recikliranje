@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { useAuthStore } from "../stores/authStore";
 
 const authStore = useAuthStore();
@@ -13,6 +14,20 @@ const login = async () => {
   await authStore.login(email.value, password.value);
   if (!authStore.response.error) {
     router.push("/kontejneri_loggedin");
+  }
+
+  if (authStore.response.error) {
+    router.push("/Registracija");
+  }
+};
+
+const emailZaReset = ref("");
+const posaljiResetLink = async () => {
+  try {
+    await sendPasswordResetEmail(auth, emailZaReset.value);
+    alert("Email za resetiranje lozinke poslan! Provjerite svoj inbox.");
+  } catch (error) {
+    console.error("Greška pri slanju emaila:", error.message);
   }
 };
 
@@ -58,6 +73,24 @@ onMounted(() => {
           <button type="submit" class="btn-primary">Prijavi se</button>
         </form>
 
+        <br />
+        <div class="form-group">
+          <input
+            v-model="emailZaReset"
+            type="email"
+            placeholder="Vaša email adresa"
+            class="form-input"
+          />
+          <br />
+          <button
+            @click="posaljiResetLink"
+            class="btn-secondary"
+            :disabled="emailZaReset.length === 0"
+          >
+            Pošalji link za reset
+          </button>
+        </div>
+
         <div
           class="password-hints"
           v-if="authStore.response.message.length > 0"
@@ -78,19 +111,5 @@ onMounted(() => {
   padding: 10px;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 8px;
-}
-
-.error-text {
-  color: #a51d1d;
-  font-size: 0.85rem;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.hint-text {
-  color: #414d12;
-  font-size: 0.8rem;
-  margin: 3px 0;
-  font-weight: bold;
 }
 </style>

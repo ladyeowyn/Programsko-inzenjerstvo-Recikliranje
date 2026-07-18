@@ -16,7 +16,7 @@ const gradovi = ["Rijeka", "Krk", "Opatija"];
 const odabraniGrad = ref("");
 
 const register = async () => {
-  await authStore.register(email.value, password.value);
+  await authStore.register(email.value, password.value, odabraniGrad.value);
   if (!authStore.response.error) {
     router.push("/Login");
   }
@@ -96,17 +96,25 @@ onMounted(() => {
             <div
               class="password-hints"
               v-if="
-                (!provjeraPass8 || !provjeraPassSlova || !provjeraPassBroja) &&
+                (!authStore.provjeraPass8(password) ||
+                  !authStore.provjeraPassSlova(password) ||
+                  !authStore.provjeraPassBroja(password)) &&
                 password.length > 0
               "
             >
-              <p class="hint-text" v-if="!provjeraPass8">
+              <p class="hint-text" v-if="!authStore.provjeraPass8(password)">
                 - Lozinka mora sadržavati minimalno 8 znakova.
               </p>
-              <p class="hint-text" v-if="!provjeraPassSlova">
+              <p
+                class="hint-text"
+                v-if="!authStore.provjeraPassSlova(password)"
+              >
                 - Lozinka mora sadržavati barem jedno veliko slovo.
               </p>
-              <p class="hint-text" v-if="!provjeraPassBroja">
+              <p
+                class="hint-text"
+                v-if="!authStore.provjeraPassBroja(password)"
+              >
                 - Lozinka mora sadržavati barem jednu brojku.
               </p>
             </div>
@@ -167,48 +175,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.error-text {
-  color: #a51d1d;
-  font-size: 0.85rem;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
 .password-hints {
   margin-top: 10px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 8px;
-}
-
-.hint-text {
-  color: #414d12;
-  font-size: 0.8rem;
-  margin: 3px 0;
-  font-weight: bold;
-}
-
-.location-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.location-item {
-  background-color: #88e088;
-  padding: 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #333;
-  transition: all 0.2s ease;
-  text-align: center;
-  font-weight: 500;
-}
-
-.location-item.active {
-  background-color: #4caf50;
-  color: white;
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 </style>

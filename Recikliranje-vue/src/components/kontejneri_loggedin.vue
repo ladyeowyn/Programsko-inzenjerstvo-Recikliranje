@@ -87,6 +87,14 @@
         >
           OBAVIJESTI
         </button>
+
+        <button
+          @click="navigate('/UserProfile')"
+          class="py-4 rounded-full font-bold text-lg tracking-widest underline transition-all duration-200 hover:scale-105 hover:brightness-110 active:scale-95"
+          style="background-color: #5aade0; color: #f5a800"
+        >
+          User profile
+        </button>
       </div>
     </div>
   </div>
