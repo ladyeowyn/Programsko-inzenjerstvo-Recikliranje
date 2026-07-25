@@ -4,6 +4,7 @@ import { auth } from "../firebase";
 import LoginView from "../views/LoginView.vue";
 import RegistracijaView from "../views/RegistracijaView.vue";
 import UserProfileView from "../views/UserProfileView.vue";
+import adminPogledView from "../views/adminPogledView.vue";
 import KontejneriGuest from "../components/kontejneri_guest.vue";
 import HomeScreen from "../components/HomeScreen.vue";
 import kontejneri_loggedin from "../components/kontejneri_loggedin.vue";
@@ -22,6 +23,11 @@ const routes = [
   {
     path: "/UserProfile",
     component: UserProfileView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/adminPogled",
+    component: adminPogledView,
     meta: { requiresAuth: true },
   },
   {

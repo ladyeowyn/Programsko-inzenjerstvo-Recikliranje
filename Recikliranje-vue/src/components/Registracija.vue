@@ -12,7 +12,6 @@ const password = ref("");
 const password2 = ref("");
 const response = ref({ error: false, message: "" });
 
-const gradovi = ["Rijeka", "Krk", "Opatija"];
 const odabraniGrad = ref("");
 
 const register = async () => {
@@ -23,19 +22,7 @@ const register = async () => {
 };
 
 const provjeraMaila = computed(() => {
-  return email.value.match("@");
-});
-
-const provjeraPass8 = computed(() => {
-  return password.value.length >= 8;
-});
-
-const provjeraPassSlova = computed(() => {
-  return password.value.match(/[A-Z]/g);
-});
-
-const provjeraPassBroja = computed(() => {
-  return password.value.match(/\d/);
+  return email.value.includes("@");
 });
 
 const passMatch = computed(() => {
@@ -45,10 +32,11 @@ const passMatch = computed(() => {
 const validacijaBotuna = computed(() => {
   return (
     provjeraMaila.value &&
-    provjeraPass8.value &&
-    provjeraPassSlova.value &&
-    provjeraPassBroja.value &&
-    passMatch.value
+    authStore.provjeraPass8(password.value) &&
+    authStore.provjeraPassSlova(password.value) &&
+    authStore.provjeraPassBroja(password.value) &&
+    passMatch.value &&
+    odabraniGrad.value.length > 0
   );
 });
 
@@ -137,16 +125,16 @@ onMounted(() => {
             <label>Lokacija</label>
             <div class="location-list">
               <div
-                v-for="grad in gradovi"
-                :key="grad"
+                v-for="grad in authStore.gradovi"
+                :key="grad.id"
                 :class="
-                  odabraniGrad == grad
+                  odabraniGrad == grad.grad
                     ? 'location-item active'
                     : 'location-item'
                 "
-                @click="odabraniGrad = grad"
+                @click="odabraniGrad = grad.grad"
               >
-                {{ grad }}
+                {{ grad.grad }}
               </div>
             </div>
           </div>

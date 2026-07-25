@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,7 +11,15 @@ import {
   EmailAuthProvider,
   reauthenticateWithCredential,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collection,
+  getDoc,
+  deleteDoc,
+  getDocs,
+  addDoc,
+} from "firebase/firestore";
 import { auth, db } from "../firebase";
 
 export const useAuthStore = defineStore(
@@ -18,6 +27,8 @@ export const useAuthStore = defineStore(
   () => {
     const user = ref(null);
     const response = ref({ error: false, message: "" });
+    const gradovi = ref([]);
+    const router = useRouter();
 
     // Praćenje stanja autentifikacije - reagira na svaku promjenu
     onAuthStateChanged(auth, (currentUser) => {
@@ -63,8 +74,7 @@ export const useAuthStore = defineStore(
           password,
         );
         response.value.error = false;
-        response.value.message =
-          "Korisnik prijavljen: " + JSON.stringify(userCredential.user);
+        response.value.message = "Korisnik prijavljen";
       } catch (error) {
         response.value.error = true;
         response.value.message = "Greška pri prijavi: " + error.message;
@@ -75,6 +85,7 @@ export const useAuthStore = defineStore(
       response.value = { error: false, message: "" };
     };
 
+    // Promjena lozinke
     const novaLozinka = ref("");
 
     const promijeniLozinku = async () => {
@@ -111,13 +122,53 @@ export const useAuthStore = defineStore(
       }
     };
 
+    const listaKorisnika = ref([]);
+    //Lista svih usera - admin
+    const dohvatiKorisnike = async () => {
+      try {
+        const aCollectionId = collection(db, "users");
+        const colSnapShot = await getDocs(aCollectionId);
+
+        listaKorisnika.value = colSnapShot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            email: data.email,
+            grad: data.grad,
+            uloga: data.uloga,
+            datumRegistracije: data.datumRegistracije,
+          };
+        });
+      } catch (error) {
+        alert(`Greška pri dohvaćanju korisnika: ${error.message}`);
+      }
+    };
+
+    // Brisanje korisnika - admin
+    const obrisiKorisnikaAdmin = async (userId) => {
+      try {
+        if (!userId) {
+          alert("Nije poslan ID korisnika!");
+          return false;
+        }
+        await deleteDoc(doc(db, "users", userId));
+
+        alert("Korisnik uspješno izbrisan iz baze!");
+        await dohvatiKorisnike();
+        return true;
+      } catch (error) {
+        alert(`Greška pri brisanju korisničkog računa: ${error.message}`);
+        return false;
+      }
+    };
+
+    // Reautentikacija
     const reauthenticate = async (email, password) => {
       const credential = EmailAuthProvider.credential(email, password);
       await reauthenticateWithCredential(auth.currentUser, credential);
     };
 
     // Validacija passworda
-
     const provjeraPass8 = computed((password) => {
       return (password) => password.length >= 8;
     });
@@ -140,10 +191,86 @@ export const useAuthStore = defineStore(
       };
     });
 
+    // Dodavanje usera - admin
+    const addUser = async (email, password, grad, uloga) => {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        const kreiraniKorisnik = userCredential.user;
+
+        const docRef = await setDoc(doc(db, "users", kreiraniKorisnik.uid), {
+          email: email,
+          grad: grad,
+          uloga: uloga,
+          datumRegistracije: new Date().toISOString(),
+        });
+        alert("Korisnik uspješno registriran i spremljen u bazu.");
+        await dohvatiKorisnike();
+      } catch (error) {
+        alert(`Greška pri kreiranju usera: ${error.message}`);
+      }
+    };
+
+    const backBotun = () => {
+      router.go(-1);
+    };
+
+    //Lista svih gradova - admin
+    const dohvatiGradove = async () => {
+      try {
+        const aCollectionId = collection(db, "lokacija");
+        const colSnapShot = await getDocs(aCollectionId);
+
+        gradovi.value = colSnapShot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            grad: data.grad,
+          };
+        });
+      } catch (error) {
+        alert(`Greška pri dohvaćanju korisnika: ${error.message}`);
+      }
+    };
+
+    // Dodavanje grada - admin
+    const addGrad = async (grad) => {
+      try {
+        const colRef = collection(db, "lokacija");
+        await addDoc(colRef, { grad: grad });
+        alert("Grad uspješno kreiran i spremljen u bazu.");
+        await dohvatiKorisnike();
+      } catch (error) {
+        alert(`Greška pri kreiranju lokacije: ${error.message}`);
+      }
+    };
+
+    // Brisanje lokacije - admin
+    const obrisiGrad = async (gradId) => {
+      try {
+        if (!gradId) {
+          alert("Nije poslan ID grada!");
+          return false;
+        }
+        await deleteDoc(doc(db, "lokacija", gradId));
+
+        alert("Grad uspješno izbrisan iz baze!");
+        await dohvatiGradove();
+        return true;
+      } catch (error) {
+        alert(`Greška pri brisanju grada s liste: ${error.message}`);
+        return false;
+      }
+    };
+
     return {
       user,
       response,
       novaLozinka,
+      gradovi,
       register,
       login,
       clearResponse,
@@ -155,6 +282,14 @@ export const useAuthStore = defineStore(
       provjeraPassSlova,
       provjeraPassBroja,
       validacijaBotuna,
+      addUser,
+      listaKorisnika,
+      dohvatiKorisnike,
+      obrisiKorisnikaAdmin,
+      backBotun,
+      dohvatiGradove,
+      addGrad,
+      obrisiGrad,
     };
   },
   {

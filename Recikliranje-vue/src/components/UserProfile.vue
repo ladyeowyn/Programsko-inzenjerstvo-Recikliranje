@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../stores/authStore";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import adminPogled from "../components/adminPogled.vue";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -11,11 +12,11 @@ const router = useRouter();
 const email = ref("");
 const password = ref("");
 const newPassword = ref("");
-const gradovi = ["Rijeka", "Krk", "Opatija"];
 const odabraniGrad = ref("");
 
 const newAuthEmail = ref("");
 const newAuthPass = ref("");
+const rola = ref("");
 
 const dohvatiGrad = async (uid) => {
   try {
@@ -49,31 +50,38 @@ const obrisiKorisnika = async () => {
   }
 };
 
+const dohvatiRolu = async (uid) => {
+  try {
+    const aDocmentId = doc(db, "users", authStore.user.uid);
+    const docSnapShot = await getDoc(aDocmentId);
+    const docData = docSnapShot.data();
+    rola.value = docData.uloga;
+  } catch (error) {
+    alert(`Greška pri dohvaćanju uloge: ${error.message}`);
+  }
+};
+
+const isAdmin = computed(() => {
+  return rola.value === "admin";
+});
+
 onMounted(() => {
   email.value = authStore.user.email;
   dohvatiGrad(authStore.user.uid);
+  dohvatiRolu(authStore.user.uid);
 });
 </script>
 
 <template>
   <div class="app-background">
-    <div>
-      <span v-if="!authStore.user" class="error-text">
-        Nema prijavljenog korisnika!
-      </span>
-      <span v-else class="hint-text">
-        Prijavljen korisnik: <b>{{ authStore.user.email }}</b></span
-      >
-    </div>
+    <header class="global-logo">
+      <RouterLink style="text-decoration: none" to="/kontejneri_loggedin">
+        <h1>ReciklirajMe</h1>
+      </RouterLink>
+      <div class="logo-underline"></div>
+    </header>
 
-    <div class="form-container">
-      <header class="global-logo">
-        <RouterLink style="text-decoration: none" to="/kontejneri_loggedin">
-          <h1>ReciklirajMe</h1>
-        </RouterLink>
-        <div class="logo-underline"></div>
-      </header>
-
+    <div class="forms-wrapper">
       <div class="form-card">
         <h2>User profile</h2>
 
@@ -141,16 +149,16 @@ onMounted(() => {
             <label>Lokacija</label>
             <div class="location-list">
               <div
-                v-for="grad in gradovi"
-                :key="grad"
+                v-for="grad in authStore.gradovi"
+                :key="grad.id"
                 :class="
-                  odabraniGrad == grad
+                  odabraniGrad == grad.grad
                     ? 'location-item active'
                     : 'location-item'
                 "
-                @click="odabraniGrad = grad"
+                @click="odabraniGrad = grad.grad"
               >
-                {{ grad }}
+                {{ grad.grad }}
               </div>
             </div>
             <br />
@@ -199,6 +207,18 @@ onMounted(() => {
             Ponovno se autentificiraj.
           </button>
         </form>
+      </div>
+
+      <div v-if="isAdmin" class="form-card">
+        <h2>Admin sekcija</h2>
+        <RouterLink style="text-decoration: none" to="/adminPogled">
+          <button class="btn-secondary">Users</button>
+        </RouterLink>
+        <br />
+        <br />
+        <RouterLink style="text-decoration: none" to="/Lokacija">
+          <button class="btn-secondary">Lokacija</button>
+        </RouterLink>
       </div>
     </div>
   </div>
