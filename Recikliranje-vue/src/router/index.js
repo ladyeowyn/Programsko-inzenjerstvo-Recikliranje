@@ -33,7 +33,6 @@ const routes = [
   {
     path: "/kontejneri_guest",
     component: KontejneriGuest,
-    meta: { requiresAuth: true },
   },
   {
     path: "/kontejneri_loggedin",
