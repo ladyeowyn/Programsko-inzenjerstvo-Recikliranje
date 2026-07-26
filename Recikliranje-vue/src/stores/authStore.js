@@ -10,7 +10,9 @@ import {
   deleteUser,
   EmailAuthProvider,
   reauthenticateWithCredential,
+  getAuth,
 } from "firebase/auth";
+import { initializeApp } from "firebase/app";
 import {
   doc,
   setDoc,
@@ -193,9 +195,11 @@ export const useAuthStore = defineStore(
 
     // Dodavanje usera - admin
     const addUser = async (email, password, grad, uloga) => {
+      const tempApp = initializeApp(auth.app.options, "TempApp");
+      const tempAuth = getAuth(tempApp);
       try {
         const userCredential = await createUserWithEmailAndPassword(
-          auth,
+          tempAuth,
           email,
           password,
         );
@@ -207,6 +211,8 @@ export const useAuthStore = defineStore(
           uloga: uloga,
           datumRegistracije: new Date().toISOString(),
         });
+
+        await signOut(tempAuth);
         alert("Korisnik uspješno registriran i spremljen u bazu.");
         await dohvatiKorisnike();
       } catch (error) {
@@ -271,6 +277,7 @@ export const useAuthStore = defineStore(
       response,
       novaLozinka,
       gradovi,
+      router,
       register,
       login,
       clearResponse,
