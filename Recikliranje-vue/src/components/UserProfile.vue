@@ -4,7 +4,6 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "../stores/authStore";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import adminPogled from "../components/adminPogled.vue";
 
 const authStore = useAuthStore();
 const router = useRouter();

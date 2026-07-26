@@ -30,6 +30,7 @@ export const useAuthStore = defineStore(
     const user = ref(null);
     const response = ref({ error: false, message: "" });
     const gradovi = ref([]);
+    const listaOtpada = ref([]);
     const router = useRouter();
 
     // Praćenje stanja autentifikacije - reagira na svaku promjenu
@@ -272,6 +273,25 @@ export const useAuthStore = defineStore(
       }
     };
 
+    //Lista svih otpada
+    const dohvatiOtpad = async () => {
+      try {
+        const aCollectionId = collection(db, "otpad");
+        const colSnapShot = await getDocs(aCollectionId);
+
+        listaOtpada.value = colSnapShot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            kategorija: data.kategorija,
+            otpad: data.predmet,
+          };
+        });
+      } catch (error) {
+        alert(`Greška pri dohvaćanju otpada: ${error.message}`);
+      }
+    };
+
     return {
       user,
       response,
@@ -291,12 +311,14 @@ export const useAuthStore = defineStore(
       validacijaBotuna,
       addUser,
       listaKorisnika,
+      listaOtpada,
       dohvatiKorisnike,
       obrisiKorisnikaAdmin,
       backBotun,
       dohvatiGradove,
       addGrad,
       obrisiGrad,
+      dohvatiOtpad,
     };
   },
   {

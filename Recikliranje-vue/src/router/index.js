@@ -6,15 +6,15 @@ import RegistracijaView from "../views/RegistracijaView.vue";
 import UserProfileView from "../views/UserProfileView.vue";
 import adminPogledView from "../views/adminPogledView.vue";
 import KontejneriGuest from "../components/kontejneri_guest.vue";
-import HomeScreen from "../components/HomeScreen.vue";
+import HomeScreenView from "../views/HomeScreenView.vue";
 import kontejneri_loggedin from "../components/kontejneri_loggedin.vue";
-import Lokacija from "../components/Lokacija.vue";
+import LokacijaView from "../views/LokacijaView.vue";
 import Obavijesti from "../components/Obavijesti.vue";
 import Reciklazna_dvorista from "../components/Reciklazna_dvorista.vue";
-import Search from "../components/Search.vue";
+import SearchView from "../views/SearchView.vue";
 
 const routes = [
-  { path: "/", component: HomeScreen },
+  { path: "/", component: HomeScreenView },
   { path: "/Login", component: LoginView },
   {
     path: "/Registracija",
@@ -39,14 +39,14 @@ const routes = [
     component: kontejneri_loggedin,
     meta: { requiresAuth: true },
   },
-  { path: "/Lokacija", component: Lokacija, meta: { requiresAuth: true } },
+  { path: "/Lokacija", component: LokacijaView, meta: { requiresAuth: true } },
   { path: "/Obavijesti", component: Obavijesti, meta: { requiresAuth: true } },
   {
     path: "/Reciklazna_dvorista",
     component: Reciklazna_dvorista,
     meta: { requiresAuth: true },
   },
-  { path: "/Search", component: Search, meta: { requiresAuth: true } },
+  { path: "/Search", component: SearchView, meta: { requiresAuth: true } },
 ];
 
 const router = createRouter({
@@ -63,7 +63,7 @@ router.beforeEach((to, from) => {
     // Ruta zahtjeva prijavu, ali korisnik nije prijavljen
     return "/login";
   } else if (
-    (to.name === "login" || to.name === "registracija") &&
+    (to.path === "/Login" || to.path === "/Registracija") &&
     currentUser
   ) {
     // Korisnik je već prijavljen, ne treba mu login/register stranica

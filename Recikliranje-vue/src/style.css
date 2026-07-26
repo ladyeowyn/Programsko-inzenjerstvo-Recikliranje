@@ -16,7 +16,7 @@ body {
 
 /* Shared Main Background used everywhere */
 .app-background {
-  position: relative;
+  position: center;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -27,6 +27,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("/pozadina.png");
+  background-attachment: fixed;
 }
 
 /* Dark tint layer for background readability */
