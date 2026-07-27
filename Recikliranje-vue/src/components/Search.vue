@@ -12,6 +12,19 @@ const filteredOtpad = computed(() => {
   );
 });
 
+const prikazSlike = (kontejner) => {
+  let slika = "defaultKontejner.svg";
+
+  if (kontejner === "PLASTIKA I LIMENKE") slika = "zutiKontejner.png";
+  else if (kontejner === "MJEŠOVITI KOMUNALNI OTPAD")
+    slika = "zeleniKontejner.png";
+  else if (kontejner === "PAPIR I KARTON") slika = "plaviKontejner.png";
+  else if (kontejner === "STAKLO") slika = "crveniKontejner.png";
+  else if (kontejner === "BIOOTPAD") slika = "smedjiKontejner.png";
+
+  return new URL(`../assets/${slika}`, import.meta.url).href;
+};
+
 onMounted(() => {
   authStore.dohvatiOtpad();
 });
@@ -38,12 +51,13 @@ onMounted(() => {
     />
     <br />
     <div v-if="trazeniPojam.length > 0">
-      <div class="form-card" v-for="otpad in filteredOtpad" :key="otpad.id">
+      <div class="search" v-for="otpad in filteredOtpad" :key="otpad.id">
         <p>
           Traženi pojam: {{ otpad.otpad }}
           <br />
           Kontejner: {{ otpad.kategorija }}
         </p>
+        <img :src="prikazSlike(otpad.kategorija)" alt="Kontejneri" />
       </div>
       <div class="error-text" v-if="trazeniPojam && !filteredOtpad.length">
         <p>Nema pronađenih rezultata</p>
@@ -94,5 +108,27 @@ onMounted(() => {
 .search-input::-webkit-search-cancel-button,
 .search-input::-webkit-search-decoration {
   -webkit-appearance: none;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #72d55c;
+  color: #1b4d1e;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-weight: 500;
+  padding: 35px;
+  border-radius: 20px;
+  width: 100%;
+  border: 2px solid #2e7d32;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.search img {
+  max-width: 200px; /* Podesi širinu slike po želji */
+  height: auto;
 }
 </style>
