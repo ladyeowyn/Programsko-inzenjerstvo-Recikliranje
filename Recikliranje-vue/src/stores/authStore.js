@@ -30,6 +30,7 @@ export const useAuthStore = defineStore(
     const user = ref(null);
     const response = ref({ error: false, message: "" });
     const gradovi = ref([]);
+    const odabraniGrad = ref("");
     const listaOtpada = ref([]);
     const router = useRouter();
 
@@ -225,6 +226,18 @@ export const useAuthStore = defineStore(
       router.go(-1);
     };
 
+    // Dohvati grad usera
+    const dohvatiGrad = async (uid) => {
+      try {
+        const aDocmentId = doc(db, "users", user.value.uid);
+        const docSnapShot = await getDoc(aDocmentId);
+        const docData = docSnapShot.data();
+        odabraniGrad.value = docData.grad;
+      } catch (error) {
+        console.error("Greška pri dohvaćanju grada:", error);
+      }
+    };
+
     //Lista svih gradova - admin
     const dohvatiGradove = async () => {
       try {
@@ -296,6 +309,7 @@ export const useAuthStore = defineStore(
       user,
       response,
       novaLozinka,
+      odabraniGrad,
       gradovi,
       router,
       register,
@@ -315,6 +329,7 @@ export const useAuthStore = defineStore(
       dohvatiKorisnike,
       obrisiKorisnikaAdmin,
       backBotun,
+      dohvatiGrad,
       dohvatiGradove,
       addGrad,
       obrisiGrad,

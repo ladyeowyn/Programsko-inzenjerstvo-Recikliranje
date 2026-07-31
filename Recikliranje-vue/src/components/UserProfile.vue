@@ -11,28 +11,16 @@ const router = useRouter();
 const email = ref("");
 const password = ref("");
 const newPassword = ref("");
-const odabraniGrad = ref("");
 
 const newAuthEmail = ref("");
 const newAuthPass = ref("");
 const rola = ref("");
 
-const dohvatiGrad = async (uid) => {
-  try {
-    const aDocmentId = doc(db, "users", authStore.user.uid);
-    const docSnapShot = await getDoc(aDocmentId);
-    const docData = docSnapShot.data();
-    odabraniGrad.value = docData.grad;
-  } catch (error) {
-    console.error("Greška pri dohvaćanju grada:", error);
-  }
-};
-
 const novaLokacija = async () => {
   try {
     const aDocmentId = doc(db, "users", authStore.user.uid);
     await updateDoc(aDocmentId, {
-      grad: odabraniGrad.value,
+      grad: authStore.odabraniGrad.value,
     });
   } catch (error) {
     console.error("Greška pri spremanju grada:", error);
@@ -66,7 +54,7 @@ const isAdmin = computed(() => {
 
 onMounted(() => {
   email.value = authStore.user.email;
-  dohvatiGrad(authStore.user.uid);
+  authStore.dohvatiGrad(authStore.user.uid);
   dohvatiRolu(authStore.user.uid);
 });
 </script>
@@ -151,11 +139,11 @@ onMounted(() => {
                 v-for="grad in authStore.gradovi"
                 :key="grad.id"
                 :class="
-                  odabraniGrad == grad.grad
+                  authStore.odabraniGrad == grad.grad
                     ? 'location-item active'
                     : 'location-item'
                 "
-                @click="odabraniGrad = grad.grad"
+                @click="authStore.odabraniGrad = grad.grad"
               >
                 {{ grad.grad }}
               </div>

@@ -17,6 +17,7 @@ const login = async () => {
   }
 
   if (authStore.response.error) {
+    alert("Korisnički račun ne postoji, registriraj se!");
     router.push("/Registracija");
   }
 };

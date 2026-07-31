@@ -1,6 +1,13 @@
 <script setup>
 import { useAuthStore } from "../stores/authStore";
 import { ref, computed, onMounted } from "vue";
+import zutiKontejner from "../assets/zutiKontejner.png";
+import crveniKontejner from "../assets/crveniKontejner.png";
+import plaviKontejner from "../assets/plaviKontejner.png";
+import smedjiKontejner from "../assets/smedjiKontejner.png";
+import zeleniKontejner from "../assets/zeleniKontejner.png";
+import siviKontejner from "../assets/siviKontejner.png";
+import defaultKontejner from "../assets/defaultKontejner.svg";
 
 const authStore = useAuthStore();
 
@@ -13,16 +20,26 @@ const filteredOtpad = computed(() => {
 });
 
 const prikazSlike = (kontejner) => {
-  let slika = "defaultKontejner.svg";
+  if (
+    authStore.odabraniGrad === "Rijeka" ||
+    authStore.odabraniGrad === "Opatija"
+  ) {
+    if (kontejner === "PLASTIKA I LIMENKE") return zutiKontejner;
+    else if (kontejner === "MJEŠOVITI KOMUNALNI OTPAD") return zeleniKontejner;
+    else if (kontejner === "PAPIR I KARTON") return plaviKontejner;
+    else if (kontejner === "STAKLO") return crveniKontejner;
+    else if (kontejner === "BIOOTPAD") return smedjiKontejner;
+  }
 
-  if (kontejner === "PLASTIKA I LIMENKE") slika = "zutiKontejner.png";
-  else if (kontejner === "MJEŠOVITI KOMUNALNI OTPAD")
-    slika = "zeleniKontejner.png";
-  else if (kontejner === "PAPIR I KARTON") slika = "plaviKontejner.png";
-  else if (kontejner === "STAKLO") slika = "crveniKontejner.png";
-  else if (kontejner === "BIOOTPAD") slika = "smedjiKontejner.png";
+  if (authStore.odabraniGrad === "Krk") {
+    if (kontejner === "PLASTIKA I LIMENKE") return zutiKontejner;
+    else if (kontejner === "MJEŠOVITI KOMUNALNI OTPAD") return zeleniKontejner;
+    else if (kontejner === "PAPIR I KARTON") return plaviKontejner;
+    else if (kontejner === "STAKLO") return siviKontejner;
+    else if (kontejner === "BIOOTPAD") return smedjiKontejner;
+  }
 
-  return new URL(`../assets/${slika}`, import.meta.url).href;
+  return defaultKontejner;
 };
 
 onMounted(() => {

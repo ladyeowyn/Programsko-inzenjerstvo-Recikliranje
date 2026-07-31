@@ -17,6 +17,7 @@ const odabraniGrad = ref("");
 const register = async () => {
   await authStore.register(email.value, password.value, odabraniGrad.value);
   if (!authStore.response.error) {
+    alert("Korisnik uspješno registriran!");
     router.push("/Login");
   }
 };
