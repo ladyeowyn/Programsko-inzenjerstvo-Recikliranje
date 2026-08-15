@@ -49,10 +49,6 @@ onMounted(() => {
 
 <template>
   <div class="app-background">
-    <form @submit.prevent="authStore.backBotun">
-      <button type="submit" class="btn-back">Nazad</button>
-    </form>
-
     <header class="global-logo">
       <RouterLink style="text-decoration: none" to="/kontejneri_loggedin">
         <h1>ReciklirajMe</h1>

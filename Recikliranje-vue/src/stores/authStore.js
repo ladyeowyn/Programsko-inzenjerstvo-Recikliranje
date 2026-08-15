@@ -249,6 +249,8 @@ export const useAuthStore = defineStore(
           return {
             id: doc.id,
             grad: data.grad,
+            lat: data.lat,
+            lon: data.lon,
           };
         });
       } catch (error) {
@@ -258,13 +260,44 @@ export const useAuthStore = defineStore(
 
     // Dodavanje grada - admin
     const addGrad = async (grad) => {
+      response.value.error = false;
       try {
+        await getCoordinates(grad);
         const colRef = collection(db, "lokacija");
-        await addDoc(colRef, { grad: grad });
+        await addDoc(colRef, { grad: grad, lat: lat.value, lon: lon.value });
         alert("Grad uspješno kreiran i spremljen u bazu.");
-        await dohvatiKorisnike();
+        await dohvatiGradove();
+        return true;
       } catch (error) {
         alert(`Greška pri kreiranju lokacije: ${error.message}`);
+      }
+    };
+
+    const lat = ref("");
+    const lon = ref("");
+
+    const getCoordinates = async (grad) => {
+      response.value.error = false;
+      lat.value = "";
+      lon.value = "";
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(grad)}&format=jsonv2`,
+          {
+            headers: {
+              "User-Agent": "ReciklirajMe/1.0 (asvecarov@unipu.hr)",
+            },
+          },
+        );
+        const data = await res.json();
+        if (data.length > 0) {
+          lat.value = data[0].lat;
+          lon.value = data[0].lon;
+        } else {
+          alert("Grad nije pronađen.");
+        }
+      } catch (error) {
+        alert(`Failed to fetch data: ${error.message}`);
       }
     };
 

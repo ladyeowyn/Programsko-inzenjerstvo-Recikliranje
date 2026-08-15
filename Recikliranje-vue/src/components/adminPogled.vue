@@ -38,11 +38,6 @@ onMounted(() => {
 
 <template>
   <div class="app-background">
-    <form @submit.prevent="authStore.backBotun">
-      <button type="submit" class="btn-back">Nazad</button>
-    </form>
-
-    <br />
     <div class="form-card">
       <h2>Admin sekcija - Users</h2>
 

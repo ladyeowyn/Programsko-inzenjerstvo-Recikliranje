@@ -18,19 +18,19 @@ onMounted(() => {
 const validacijaBotuna = computed(() => {
   return grad.value.length > 0;
 });
+
+const spremiGrad = async () => {
+  await authStore.addGrad(grad.value);
+  grad.value = "";
+};
 </script>
 
 <template>
   <div class="app-background">
-    <form @submit.prevent="authStore.backBotun">
-      <button type="submit" class="btn-back">Nazad</button>
-    </form>
-
-    <br />
     <div class="form-card">
       <h2>Admin sekcija - Lokacija</h2>
 
-      <form @submit.prevent="authStore.addGrad">
+      <form @submit.prevent="spremiGrad">
         <div class="form-group">
           <label>Grad</label>
           <input
@@ -54,12 +54,14 @@ const validacijaBotuna = computed(() => {
           <tbody>
             <tr>
               <th>Grad</th>
+              <th>Koordinate</th>
               <th>Akcija</th>
             </tr>
           </tbody>
           <tbody>
             <tr v-for="grad in authStore.gradovi" :key="grad.id">
               <td>{{ grad.grad }}</td>
+              <td>{{ grad.lat }} , {{ grad.lon }}</td>
               <td>
                 <button
                   class="btn-secondary"

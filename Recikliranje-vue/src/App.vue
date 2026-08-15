@@ -8,7 +8,7 @@ const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
 
-const prikaziLogoutGumb = computed(() => {
+const prikaziGumb = computed(() => {
   const skriveneRute = ["/Login", "/Registracija", "/"];
 
   return !skriveneRute.includes(route.path) && authStore.user;
@@ -21,7 +21,11 @@ const logout = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="logout" v-if="prikaziLogoutGumb">
+  <form @submit.prevent="authStore.backBotun" v-if="prikaziGumb">
+    <button type="submit" class="btn-back">Nazad</button>
+  </form>
+
+  <form @submit.prevent="logout" v-if="prikaziGumb">
     <button type="submit" class="btn-logout">Odjavi se</button>
     <span v-if="authStore.user" class="usr-info">
       Prijavljen korisnik: <b>{{ authStore.user.email }} </b>
