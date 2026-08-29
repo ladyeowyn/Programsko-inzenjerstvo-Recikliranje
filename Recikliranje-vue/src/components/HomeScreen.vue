@@ -16,7 +16,7 @@
         <button class="btn-primary">Registracija</button>
       </RouterLink>
 
-      <RouterLink style="text-decoration: none" to="/kontejneri_guest">
+      <RouterLink style="text-decoration: none" to="/KontejneriGuest">
         <button class="btn-primary">Kontejneri</button>
       </RouterLink>
     </div>

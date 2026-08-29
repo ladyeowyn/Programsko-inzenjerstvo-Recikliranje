@@ -206,6 +206,11 @@ onMounted(() => {
         <RouterLink style="text-decoration: none" to="/Lokacija">
           <button class="btn-secondary">Lokacija</button>
         </RouterLink>
+        <br />
+        <br />
+        <RouterLink style="text-decoration: none" to="/Reciklazna">
+          <button class="btn-secondary">Reciklažna</button>
+        </RouterLink>
       </div>
     </div>
   </div>

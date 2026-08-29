@@ -1,29 +1,28 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { useAuthStore } from "../stores/authStore";
+import { useMapaStore } from "../stores/mapaStore";
+
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const authStore = useAuthStore();
+const mapaStore = useMapaStore();
 
 const map = ref(null);
-const marker = ref(null);
-const lat = ref("");
-const lon = ref("");
 
-const latLon = () => {
-  authStore.gradovi.find((grad) => {
-    grad.grad === authStore.odabraniGrad;
-
-    lat.value = grad.lat;
-    lon.value = grad.lon;
+const prikaziMarkere = () => {
+  mapaStore.markeri.forEach((marker) => {
+    L.marker([Number(marker.lat), Number(marker.lon)])
+      .addTo(map.value)
+      .bindPopup(marker.naziv);
   });
 };
 
 const mapa = async () => {
-  if (!lat.value || !lon.value) return;
+  if (!mapaStore.lat || !mapaStore.lon) return;
 
-  map.value = L.map("map").setView([lat.value, lon.value], 15);
+  map.value = L.map("map").setView([mapaStore.lat, mapaStore.lon], 15);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
@@ -32,20 +31,23 @@ const mapa = async () => {
 
   L.control.scale({ imperial: true, metric: true }).addTo(map.value);
 
-  marker.value = L.marker([lat.value, lon.value])
-    .addTo(map.value)
-    .bindPopup("Hello World!")
-    .openPopup();
+  prikaziMarkere();
 };
 
-watch([lat, lon], () => {
-  mapa();
-});
+watch(
+  () => [mapaStore.lat, mapaStore.lon],
+  () => {
+    if (!map.value) {
+      mapa();
+    }
+  },
+);
 
 onMounted(() => {
   authStore.dohvatiGrad(authStore.user.uid);
   authStore.dohvatiGradove();
-  latLon();
+  mapaStore.dohvatiMarkere();
+  mapaStore.latLon();
 });
 </script>
 
@@ -58,7 +60,6 @@ onMounted(() => {
       <div class="logo-underline"></div>
     </header>
     <h1>Reciklažna dvorišta</h1>
-    <span> Lokacija: {{ authStore.odabraniGrad }}</span>
     <div id="map"></div>
   </div>
 </template>

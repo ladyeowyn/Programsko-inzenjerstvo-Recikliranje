@@ -5,13 +5,16 @@ import LoginView from "../views/LoginView.vue";
 import RegistracijaView from "../views/RegistracijaView.vue";
 import UserProfileView from "../views/UserProfileView.vue";
 import adminPogledView from "../views/adminPogledView.vue";
-import KontejneriGuest from "../components/kontejneri_guest.vue";
+import KontejneriGuestView from "../views/kontejneriGuestView.vue";
 import HomeScreenView from "../views/HomeScreenView.vue";
-import kontejneri_loggedin from "../components/kontejneri_loggedin.vue";
+import KontejneriLoggedInView from "../views/KontejneriLoggedIn.vue";
 import LokacijaView from "../views/LokacijaView.vue";
-import Obavijesti from "../components/Obavijesti.vue";
-import Reciklazna_dvorista from "../components/Reciklazna_dvorista.vue";
+import ReciklaznaView from "../views/ReciklaznaView.vue";
+import ObavijestiView from "../views/ObavijestiView.vue";
+import ReciklaznaDvoristaView from "../views/ReciklaznaDvoristaView.vue";
 import SearchView from "../views/SearchView.vue";
+import FAQView from "../views/FAQView.vue";
+import EducirajSeView from "../views/EducirajSeView.vue";
 
 const routes = [
   { path: "/", component: HomeScreenView },
@@ -31,22 +34,37 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/kontejneri_guest",
-    component: KontejneriGuest,
+    path: "/KontejneriGuest",
+    component: KontejneriGuestView,
   },
   {
     path: "/kontejneri_loggedin",
-    component: kontejneri_loggedin,
+    component: KontejneriLoggedInView,
     meta: { requiresAuth: true },
   },
   { path: "/Lokacija", component: LokacijaView, meta: { requiresAuth: true } },
-  { path: "/Obavijesti", component: Obavijesti, meta: { requiresAuth: true } },
+  {
+    path: "/Reciklazna",
+    component: ReciklaznaView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/Obavijesti",
+    component: ObavijestiView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/EducirajSe",
+    component: EducirajSeView,
+    meta: { requiresAuth: true },
+  },
   {
     path: "/Reciklazna_dvorista",
-    component: Reciklazna_dvorista,
+    component: ReciklaznaDvoristaView,
     meta: { requiresAuth: true },
   },
   { path: "/Search", component: SearchView, meta: { requiresAuth: true } },
+  { path: "/FAQ", component: FAQView },
 ];
 
 const router = createRouter({

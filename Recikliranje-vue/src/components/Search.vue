@@ -1,15 +1,11 @@
 <script setup>
 import { useAuthStore } from "../stores/authStore";
+import { useKontejneriStore } from "../stores/kontejneriStore";
+
 import { ref, computed, onMounted } from "vue";
-import zutiKontejner from "../assets/zutiKontejner.png";
-import crveniKontejner from "../assets/crveniKontejner.png";
-import plaviKontejner from "../assets/plaviKontejner.png";
-import smedjiKontejner from "../assets/smedjiKontejner.png";
-import zeleniKontejner from "../assets/zeleniKontejner.png";
-import siviKontejner from "../assets/siviKontejner.png";
-import defaultKontejner from "../assets/defaultKontejner.svg";
 
 const authStore = useAuthStore();
+const kontejneriStore = useKontejneriStore();
 
 const trazeniPojam = ref("");
 
@@ -24,22 +20,32 @@ const prikazSlike = (kontejner) => {
     authStore.odabraniGrad === "Rijeka" ||
     authStore.odabraniGrad === "Opatija"
   ) {
-    if (kontejner === "PLASTIKA I LIMENKE") return zutiKontejner;
-    else if (kontejner === "MJEŠOVITI KOMUNALNI OTPAD") return zeleniKontejner;
-    else if (kontejner === "PAPIR I KARTON") return plaviKontejner;
-    else if (kontejner === "STAKLO") return crveniKontejner;
-    else if (kontejner === "BIOOTPAD") return smedjiKontejner;
+    if (kontejner === "PLASTIKA I LIMENKE")
+      return kontejneriStore.slikeKontejnera.zuti;
+    else if (kontejner === "MJEŠOVITI KOMUNALNI OTPAD")
+      return kontejneriStore.slikeKontejnera.zeleni;
+    else if (kontejner === "PAPIR I KARTON")
+      return kontejneriStore.slikeKontejnera.plavi;
+    else if (kontejner === "STAKLO")
+      return kontejneriStore.slikeKontejnera.crveni;
+    else if (kontejner === "BIOOTPAD")
+      return kontejneriStore.slikeKontejnera.smedji;
   }
 
   if (authStore.odabraniGrad === "Krk") {
-    if (kontejner === "PLASTIKA I LIMENKE") return zutiKontejner;
-    else if (kontejner === "MJEŠOVITI KOMUNALNI OTPAD") return zeleniKontejner;
-    else if (kontejner === "PAPIR I KARTON") return plaviKontejner;
-    else if (kontejner === "STAKLO") return siviKontejner;
-    else if (kontejner === "BIOOTPAD") return smedjiKontejner;
+    if (kontejner === "PLASTIKA I LIMENKE")
+      return kontejneriStore.slikeKontejnera.zuti;
+    else if (kontejner === "MJEŠOVITI KOMUNALNI OTPAD")
+      return kontejneriStore.slikeKontejnera.zeleni;
+    else if (kontejner === "PAPIR I KARTON")
+      return kontejneriStore.slikeKontejnera.plavi;
+    else if (kontejner === "STAKLO")
+      return kontejneriStore.slikeKontejnera.sivi;
+    else if (kontejner === "BIOOTPAD")
+      return kontejneriStore.slikeKontejnera.smedji;
   }
 
-  return defaultKontejner;
+  return kontejneriStore.slikeKontejnera.default;
 };
 
 onMounted(() => {

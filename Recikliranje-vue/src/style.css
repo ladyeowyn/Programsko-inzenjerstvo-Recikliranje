@@ -329,3 +329,377 @@ body {
   transform: scale(1.02);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* --- 7. HOME PAGE SPECIFIC LAYOUT --- */
+
+/* Glavni kontejner koji dijeli ekran na lijevu i desnu stranu */
+.home-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  z-index: 10;
+  gap: 40px;
+}
+
+/* Lijeva strana (Logo + Kante) */
+.left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-section .global-logo {
+  margin-bottom: 25px;
+}
+
+/* Prikaz kontejnera u redu */
+.bins-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.bin-item {
+  text-align: center;
+}
+
+.kontejner-opis {
+  width: 90%;
+  max-width: 850px;
+  margin: 40px auto 0;
+  padding: 30px 40px;
+
+  background: white;
+  border-radius: 20px;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+
+  text-align: center;
+}
+
+.kontejner-opis h2 {
+  margin: 0 0 30px;
+
+  font-size: 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.opis-sekcija {
+  margin-bottom: 25px;
+}
+
+.opis-sekcija h3 {
+  margin-bottom: 10px;
+
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.opis-sekcija p {
+  margin: 0;
+
+  font-size: 17px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.savjet {
+  margin-top: 30px;
+  padding: 18px 22px;
+
+  border-radius: 12px;
+
+  background: #f5f5f5;
+
+  text-align: left;
+}
+
+.savjet strong {
+  display: block;
+  margin-bottom: 8px;
+
+  font-size: 18px;
+}
+
+.savjet p {
+  margin: 0;
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.bin-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+/* Tamnoplavi okrugli bedževi/oznake ispod kontejnera */
+.bin-label {
+  background-color: #176383;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 12px 6px;
+  border-radius: 50px;
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  line-height: 1.1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Desna strana (Meni s gumbima) */
+.right-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-group-vertical.home-nav {
+  max-width: 320px;
+  width: 280px;
+  gap: 15px;
+  padding: 0;
+}
+
+/* Prilagodba plavih gumba s tvoje slike */
+.nav-btn {
+  background-color: #4baee8;
+  color: #0d2838;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 900;
+  padding: 16px 20px;
+  border-radius: 30px;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background-color: #319bdc;
+  color: #ffffff;
+}
+
+/* Izgled onemogućenih (zaključanih) gumba sa slike */
+.nav-btn:disabled {
+  background-color: rgba(75, 174, 232, 0.45);
+  color: rgba(13, 40, 56, 0.4);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.lock-icon {
+  position: absolute;
+  left: 20px;
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+/* Responzivnost za manje ekrane (mobitele) */
+@media (max-width: 850px) {
+  .home-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bins-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .bin-item {
+    min-width: 80px;
+  }
+}
+
+.unstyled-button {
+  all: unset;
+  cursor: pointer;
+}
+
+/* --- FAQ --- */
+
+.faq-container {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px 20px 60px;
+  z-index: 10;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.faq-header h1 {
+  color: #2e7d32;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.faq-header p {
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.faq-section {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.faq-section h2 {
+  color: #2e7d32;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-item {
+  background-color: white;
+  border: 1px solid #c8e6c9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Pitanje */
+
+.faq-item summary {
+  padding: 17px 20px;
+  cursor: pointer;
+
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+
+  list-style: none;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  font-size: 1.5rem;
+  color: #2e7d32;
+  font-weight: normal;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item summary:hover {
+  background-color: #f7fee7;
+}
+
+/* Odgovor */
+
+.faq-answer {
+  padding: 0 20px 20px;
+  border-top: 1px solid #e2e8f0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.faq-answer p {
+  margin: 15px 0;
+}
+
+.faq-answer ul {
+  margin: 10px 0 15px 20px;
+}
+
+.faq-answer li {
+  margin-bottom: 5px;
+}
+
+/* Linkovi */
+
+.faq-link,
+.faq-register {
+  display: inline-flex;
+  align-items: center;
+
+  margin-top: 5px;
+  padding: 9px 16px;
+
+  border-radius: 25px;
+
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+
+  transition: all 0.2s ease;
+}
+
+.faq-link {
+  background-color: #4baee8;
+  color: #0d2838;
+}
+
+.faq-link:hover {
+  background-color: #319bdc;
+  color: white;
+}
+
+.faq-register {
+  background-color: #72d55c;
+  color: white;
+}
+
+.faq-register:hover {
+  background-color: #4caf50;
+}
+
+/* Mobitel */
+
+@media (max-width: 600px) {
+  .faq-container {
+    padding: 25px 15px 40px;
+  }
+
+  .faq-header h1 {
+    font-size: 2rem;
+  }
+
+  .faq-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .faq-item summary {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+
+  .faq-answer {
+    padding: 0 15px 17px;
+  }
+}
