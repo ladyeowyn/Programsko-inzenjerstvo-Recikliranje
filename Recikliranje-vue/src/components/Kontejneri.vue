@@ -1,7 +1,10 @@
 <script setup>
 import { useKontejneriStore } from "../stores/kontejneriStore";
+import { useAuthStore } from "../stores/authStore";
+
 import { ref, onMounted } from "vue";
 
+const authStore = useAuthStore();
 const kontejneriStore = useKontejneriStore();
 const odabraniKontejner = ref(null);
 
@@ -19,7 +22,13 @@ onMounted(() => {
         :key="kontejner.id"
       >
         <button class="unstyled-button" @click="odabraniKontejner = kontejner">
-          <img :src="kontejneriStore.slikeKontejnera[kontejner.slika]" />
+          <img
+            v-if="
+              authStore.odabraniGrad === `Krk` && kontejner.tip === `STAKLO`
+            "
+            :src="kontejneriStore.slikeKontejnera[kontejner.slika1]"
+          />
+          <img v-else :src="kontejneriStore.slikeKontejnera[kontejner.slika]" />
           <div class="bin-label">{{ kontejner.tip }}</div>
         </button>
       </div>

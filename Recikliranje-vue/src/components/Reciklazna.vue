@@ -14,12 +14,23 @@ const naziv = ref("");
 const lat = ref("");
 const lon = ref("");
 
+const prikaziMarkere = () => {
+  mapaStore.markeri.forEach((marker) => {
+    L.marker([Number(marker.lat), Number(marker.lon)])
+      .addTo(map.value)
+      .bindPopup(marker.naziv);
+  });
+};
+
 const novaLokacija = async () => {
   try {
     const aDocmentId = doc(db, "users", authStore.user.uid);
     await updateDoc(aDocmentId, {
-      grad: authStore.odabraniGrad.value,
+      grad: authStore.odabraniGrad,
     });
+    alert("Lokacija spremljena");
+
+    await mapaStore.latLon();
   } catch (error) {
     console.error("Greška pri spremanju grada:", error);
   }
@@ -29,6 +40,11 @@ const map = ref(null);
 
 const mapa = async () => {
   if (!mapaStore.lat || !mapaStore.lon) return;
+
+  if (map.value) {
+    map.value.setView([mapaStore.lat, mapaStore.lon], 15);
+    return;
+  }
 
   map.value = L.map("map").setView([mapaStore.lat, mapaStore.lon], 15);
 
@@ -74,6 +90,12 @@ watch(
   },
 );
 
+watch(
+  () => mapaStore.markeri,
+  () => prikaziMarkere(),
+  { deep: true },
+);
+
 onMounted(() => {
   authStore.dohvatiGrad(authStore.user.uid);
   authStore.dohvatiGradove();
@@ -114,6 +136,8 @@ onMounted(() => {
               </div>
             </div>
           </div>
+
+          <button type="submit" class="btn-secondary">Spremi lokaciju.</button>
         </form>
 
         <form @submit.prevent="spremanjeMarkera">

@@ -39,6 +39,7 @@ export const useKontejneriStore = defineStore("kontejner", () => {
           neOdlagati: data.neOdlagati,
           savjet: data.savjet,
           slika: data.slika,
+          slika1: data.slika1,
         };
       });
     } catch (error) {
