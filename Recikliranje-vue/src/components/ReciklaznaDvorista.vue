@@ -43,6 +43,12 @@ watch(
   },
 );
 
+watch(
+  () => mapaStore.markeri,
+  () => prikaziMarkere(),
+  { deep: true },
+);
+
 onMounted(() => {
   authStore.dohvatiGrad(authStore.user.uid);
   authStore.dohvatiGradove();
