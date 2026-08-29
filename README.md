@@ -3,7 +3,7 @@ Projekt iz kolegija Programsko inženjerstvo
 TIM: 319/25
 
 ## Team memebers:
-- Lana Kohut (voditelj tima) lkohut@unipu.hr
+- ~~Lana Kohut (voditelj tima) lkohut@unipu.hr~~
 - Anja Svećarovski asvecarov@unipu.hr
 
 [Fakultet informatike u Puli](https://fipu.unipu.hr)
@@ -19,6 +19,15 @@ Aplikacija uključuje informacije o svakom kontejneru, što se u taj kontejner b
 
 ## Link na javni prototip
 [ReciklirajMe prototip](https://reciklirajme.my.canva.site)
+
+## Link na dokumentaciju
+[ReciklirajMe dokumentacija](https://)
+
+## Link na public video explanation
+[ReciklirajMe video](https://)
+
+## Link na public app
+[ReciklirajMe](https://)
 
 ## Zaduženja (planirana) po članu tima
 https://github.com/users/ladyeowyn/projects/1/views/1
