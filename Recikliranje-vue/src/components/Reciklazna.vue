@@ -113,10 +113,6 @@ onMounted(() => {
                 {{ grad.grad }}
               </div>
             </div>
-            <br />
-            <button type="submit" class="btn-secondary">
-              Promijeni lokaciju.
-            </button>
           </div>
         </form>
 

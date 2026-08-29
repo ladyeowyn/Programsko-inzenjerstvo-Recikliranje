@@ -20,10 +20,11 @@ const novaLokacija = async () => {
   try {
     const aDocmentId = doc(db, "users", authStore.user.uid);
     await updateDoc(aDocmentId, {
-      grad: authStore.odabraniGrad.value,
+      grad: authStore.odabraniGrad,
     });
+    alert("Grad uspješno promijenjen");
   } catch (error) {
-    console.error("Greška pri spremanju grada:", error);
+    alert("Greška pri spremanju grada:", error);
   }
 };
 

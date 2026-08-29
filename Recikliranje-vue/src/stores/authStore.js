@@ -60,6 +60,8 @@ export const useAuthStore = defineStore(
           datumRegistracije: new Date().toISOString(),
         });
 
+        odabraniGrad.value = grad;
+
         response.value.error = false;
         response.value.message =
           "Korisnik uspješno registriran i spremljen u bazu!";
@@ -229,7 +231,7 @@ export const useAuthStore = defineStore(
     // Dohvati grad usera
     const dohvatiGrad = async (uid) => {
       try {
-        const aDocmentId = doc(db, "users", user.value.uid);
+        const aDocmentId = doc(db, "users", uid);
         const docSnapShot = await getDoc(aDocmentId);
         const docData = docSnapShot.data();
         odabraniGrad.value = docData.grad;
