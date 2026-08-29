@@ -27,7 +27,7 @@ Aplikacija uključuje informacije o svakom kontejneru, što se u taj kontejner b
 [ReciklirajMe video](https://)
 
 ## Link na public app
-[ReciklirajMe](https://)
+[ReciklirajMe](https://reciklirajme-b5feb.web.app)
 
 ## Zaduženja (planirana) po članu tima
 https://github.com/users/ladyeowyn/projects/1/views/1
