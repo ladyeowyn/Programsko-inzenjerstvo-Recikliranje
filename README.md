@@ -21,13 +21,22 @@ Aplikacija uključuje informacije o svakom kontejneru, što se u taj kontejner b
 [ReciklirajMe prototip](https://reciklirajme.my.canva.site)
 
 ## Link na dokumentaciju
-[ReciklirajMe dokumentacija](https://)
+[ReciklirajMe dokumentacija](https://drive.google.com/file/d/1hyovBxJhyIcTYmj4W36NkhGVhmmSPG2n/view?usp=sharing)
 
 ## Link na public video explanation
 [ReciklirajMe video](https://)
 
 ## Link na public app
-[ReciklirajMe](https://)
+[ReciklirajMe](https://reciklirajme-b5feb.web.app)
 
 ## Zaduženja (planirana) po članu tima
 https://github.com/users/ladyeowyn/projects/1/views/1
+
+## Credentials
+Regular User:
+Email: asvecarov@student.unipu.hr
+Password: mamaTata123
+
+Admin:
+Email: aniareciklirajme@gmail.com
+Password: mamaTata123
