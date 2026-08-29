@@ -254,7 +254,7 @@ export const useAuthStore = defineStore(
           };
         });
       } catch (error) {
-        alert(`Greška pri dohvaćanju korisnika: ${error.message}`);
+        alert(`Greška pri dohvaćanju gradova: ${error.message}`);
       }
     };
 

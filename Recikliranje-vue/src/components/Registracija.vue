@@ -43,6 +43,7 @@ const validacijaBotuna = computed(() => {
 
 onMounted(() => {
   authStore.clearResponse();
+  authStore.dohvatiGradove();
 });
 </script>
 
