@@ -34,9 +34,9 @@ https://github.com/users/ladyeowyn/projects/1/views/1
 
 ## Credentials
 Regular User:
-Email: asvecarov@student.unipu.hr
-Password: mamaTata123
+- Email: asvecarov@student.unipu.hr
+- Password: mamaTata123
 
 Admin:
-Email: aniareciklirajme@gmail.com
-Password: mamaTata123
+- Email: aniareciklirajme@gmail.com
+- Password: mamaTata123
