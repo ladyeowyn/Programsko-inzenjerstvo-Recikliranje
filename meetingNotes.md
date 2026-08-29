@@ -6,6 +6,7 @@
 - [02.05.2026. - Tjedni sastanak](#02052026---tjedni-sastanak)
 - [17.05.2026. - Tjedni sastanak](#17052026---tjedni-sastanak)
 - [23.05.2026. - Tjedni sastanak](#23052026---tjedni-sastanak)
+- [15.08.2026. - Tjedni sastanak](#15082026---tjedni-sastanak)
 
 # 04.04.2026. - Inicijalni sastanak
 
@@ -146,3 +147,16 @@ Sastanak obavljen preko Discorda.
 
 Napomena: Update od prijašnjih sastanaka koji nije ovdje zapisan:
 - Canva dozvoljava korištenje slika za nekomercijalne svrhe ukoliko su izmijenjene (nešto je dodano na njih), što je u našem slučaju u redu jer je Canvina slika naša pozadina
+
+# 15.08.2026. - Tjedni sastanak
+
+Prisutni svi članovi tima.
+Sastanak obavljen preko Discorda.
+
+## Diskusija
+
+1. Lana odlučila da neće nastaviti daljnji rad na projektu, Anja će završiti do kraja
+
+Ostalo:
+- pages sa kontejnerima (guest i loggedin)
+- FAQ, EducirajSe i Obavijesti
