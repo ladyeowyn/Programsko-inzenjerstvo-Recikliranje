@@ -23,8 +23,8 @@ Aplikacija uključuje informacije o svakom kontejneru, što se u taj kontejner b
 ## Link na dokumentaciju
 [ReciklirajMe dokumentacija](https://drive.google.com/file/d/1hyovBxJhyIcTYmj4W36NkhGVhmmSPG2n/view?usp=sharing)
 
-## Link na public video explanation
-[ReciklirajMe video](https://)
+## Link na public video presentation
+[ReciklirajMe video](https://youtu.be/7IVbUKC3oNE)
 
 ## Link na public app
 [ReciklirajMe](https://reciklirajme-b5feb.web.app)
