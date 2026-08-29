@@ -17,7 +17,7 @@ const filteredOtpad = computed(() => {
 
 const prikazSlike = (kontejner) => {
   if (
-    authStore.odabraniGrad === "Rijeka" ||
+    authStore.odabraniGrad === "Grad Rijeka" ||
     authStore.odabraniGrad === "Opatija"
   ) {
     if (kontejner === "PLASTIKA I LIMENKE")
